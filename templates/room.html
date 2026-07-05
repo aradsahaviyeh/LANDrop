@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room: {{ title }}</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
+
+    <div class="w-full max-w-2xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8">
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+
+            <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-5 text-white text-4xl">
+                🏠
+            </div>
+
+            <!-- نمایش نام روم -->
+            <h1 class="text-3xl font-bold text-white">
+                Room: <span class="text-blue-400">{{ title }}</span>
+            </h1>
+
+            <p class="text-gray-300 mt-3">
+                Upload your files to this room and manage them.
+            </p>
+
+        </div>
+
+        <!-- Form (Upload File to Room) -->
+        <form method="POST" enctype="multipart/form-data" class="space-y-6 mb-10">
+
+            <!-- File Input -->
+            <div>
+                <label class="block text-gray-200 mb-2 font-medium">
+                    Choose File to Upload
+                </label>
+
+                <input
+                    type="file"
+                    name="file"
+                    required
+                    class="w-full rounded-xl bg-white/20 text-white file:mr-4 file:px-5 file:py-2 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white file:cursor-pointer hover:file:bg-blue-700"
+                >
+            </div>
+
+            <!-- Button -->
+            <button
+                type="submit"
+                class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition duration-300 text-white font-semibold text-lg shadow-lg"
+            >
+                Upload File 🚀
+            </button>
+
+        </form>
+
+        <!-- Files List Section -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                📂 Files in this Room
+            </h2>
+
+            {% if files %}
+                <div class="space-y-3">
+                    {% for file in files %}
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition duration-200">
+
+                            <!-- File Icon & Name -->
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="text-2xl select-none">📄</span>
+                                <span class="text-gray-100 font-medium truncate" title="{{ file }}">
+                                    {{ file }}
+                                </span>
+                            </div>
+
+                            <!-- Download Button -->
+                            <a
+                                href="{{ url_for('downloaded_file', title=title, filename=file) }}"
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition shrink-0 shadow"
+                            >
+                                📥 <span class="hidden sm:inline">Download</span>
+                            </a>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-6 text-gray-400">
+                    No files uploaded in this room yet.
+                </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Back to Home -->
+        <div class="text-center mt-6">
+            <a href="{{ url_for('index') }}" class="text-gray-400 hover:text-white transition duration-200 text-sm">
+                ← Go back to Room Selection
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Room</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+    <!-- for generate uuid  -->
+    <script type="text/javascript">
+      function uuidv4() {
+        let room_name = document.getElementById('room_name');
+        room_name.value = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+          (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+        );
+      };
+
+    </script>
+
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
+
+    <div class="w-full max-w-xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8">
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+
+            <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-5 text-white text-4xl">
+                🔑
+            </div>
+
+            <h1 class="text-3xl font-bold text-white">
+                Enter a Room
+            </h1>
+
+            <p class="text-gray-300 mt-3">
+                Type the room name to enter or create it.
+            </p>
+
+        </div>
+
+        <!-- Form -->
+        <form method="POST" class="space-y-6">
+
+            <!-- Room Title -->
+            <div>
+                <label class="block text-gray-200 mb-2 font-medium">
+                    Room Name
+                </label>
+
+                <input
+                    id="room_name"
+                    type="text"
+                    name="room"
+                    placeholder="Enter room name..."
+                    class="w-full rounded-xl bg-white/20 border border-white/20 px-4 py-3 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500"
+                >
+            </div>
+
+            <!-- Button -->
+            <button
+                type="button"
+                class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transition duration-300 text-white font-semibold text-lg shadow-lg"
+                onclick="uuidv4()"
+            >
+                Generate Room Name 🔑
+            </button>
+            <button
+                type="submit"
+                class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transition duration-300 text-white font-semibold text-lg shadow-lg"
+            >
+                Enter Room 🚪
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
