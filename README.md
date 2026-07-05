@@ -84,8 +84,12 @@ macOS: Go to System Settings > Network > Firewall and turn it off, or configure 
 Linux (Ubuntu/Debian): Disable UFW or allow the specific port:
 
 sudo ufw disable
-# OR
+
+OR
+
 sudo ufw allow 5000/tcp
+
+
 
 
 
